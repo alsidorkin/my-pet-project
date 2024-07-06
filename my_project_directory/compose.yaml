@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  database:
+    container_name: my_mysql
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: db_petproject
+      MYSQL_USER: alexandr
+      MYSQL_PASSWORD: 12345
+    ports:
+      - "3306:3306"
+
+     
