@@ -1,0 +1,137 @@
+.container .sidebar ul.nav h4{
+    color: #c1c1c1;
+    text-align: center;
+    font-size: 18px;
+    font-weight: 300;
+}
+
+h2.accordion-header{
+    width: 100%;
+}
+
+.accordion-header button.accordion-button span{
+    display: inline-block;
+    margin-right: 22px;
+}
+
+.accordion-header button.accordion-button span i{
+    display: inline-block;
+    margin-right: 3px;
+    color: #198754;
+}
+
+.accordion-button::before {
+    display: none;
+}
+.accordion-button::before {
+    content: "\f054";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 1rem;
+}
+.accordion-button.collapsed::before {
+    content: "\f053";
+}
+
+/* стилизация тегов на странице редактирования тегов */
+div.tags-container div.tag,
+.accordion-body p a.tag,.card-body p a.tag {
+    display: inline-block;
+    background-color: #020202;
+    color: #f1f1f1;
+    padding: 1px 6px;
+    border-radius:  4px;
+    margin: 5 4px;
+}
+div.tags-container div.tag button{
+border: none;
+background: inherit;
+color: #ffffff;
+padding-left: 11px;
+border-left: 1px solid #c1c1c1;
+}
+
+div.tags-container div.tag span{
+display: inline-block;
+padding-right: 10px;
+}
+
+/* оформление вывода задач (tasks) */
+.accordion-header button {
+    border-radius: 3px;
+    color: #ffffff !important;
+}
+.accordion-header button span{
+   font-size: 18px;
+   font-weight: 300;
+}
+
+
+.accordion-body p a.tag,
+.card-body p a.tag{
+text-decoration: none;
+
+}
+
+.accordion-body p a.tag:hover,
+.card-body p a.tag:hover{
+
+background: #198754;
+}
+
+.filter-priority a{
+    color: #ffffff;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+.filter-priority a:hover{
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: underline;
+}
+.accordion-header button.accordion-button span{
+    display: inline-block;
+    margin-right: 22px;
+}
+.accordion-header button.accordion-button span i{
+    display: inline-block;
+    margin-right: 4px;
+    color: #e2e2e2;
+}
+
+.article .container h1 span{
+    color: coral;
+}
+
+
+/* кастомизация календаря на главной */
+
+.fc-event:hover{
+    background-color: coral;
+    cursor: pointer;
+}
+
+.nav-item .nav-link.active {
+    font-weight: bold;
+    color: blue;
+}
+
+.georgia-font{
+    /* font-family: 'Georgia', serif; */
+    font-family: 'Roboto', sans-serif;
+}
+/* #calendar{
+    width: 1300px;
+    padding-right : 0px;
+    overflow-x: auto;
+    margin-right: 20px;
+
+}
+
+.fc td {
+    --bs-gutter-x: 1.5rem !important;
+} */
+
+/* .fc-day{
+    text-align: center;
+} */

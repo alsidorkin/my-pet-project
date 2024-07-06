@@ -1,0 +1,61 @@
+{# templates/base.html.twig #}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}My pet project{% endblock %}</title>
+    <link rel="stylesheet" href="{{ asset('app/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('app/css/style.css') }}">
+    <script src="https://kit.fontawesome.com/1d9689321f.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="sidebar col-md-3">
+            <div class="d-flex georgia-font flex-column flex-shrink-0 p-3 text-white bg-secondary fs-3" style="min-height: 900px;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
+                    <span class="fs-1">My pet project</span>
+                </a>
+                <hr>
+                <ul class="nav nav-pills flex-column mb-auto">
+                  
+                        <li class="nav-item">
+                            <a href="{{ path('app_home') }}" class="nav-link {{ is_active(path('app_home')) }}">Home</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_home') }}" class="nav-link text-dark {{ is_active(path('app_home')) }}">Users</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_home') }}" class="nav-link text-dark {{ is_active(path('app_home')) }}">Roles</a>
+                        </li>
+                </ul>
+                <hr>
+                <div class="dropdown">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="https://avatars.githubusercontent.com/u/140085460?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
+                   </a>
+                    <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+                        <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/auth/logout">Sign out</a></li>
+                        <li><a class="dropdown-item" href="/auth/login">Sign in</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="article col-md-9">
+            <div class="georgia-font container mt-4">
+                {% block content %}
+    <h1>Home page</h1>
+    {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{{ asset('app/js/bootstrap.bundle.min.js') }}"></script>
+</body>
+</html>
