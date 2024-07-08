@@ -2,22 +2,43 @@
 
 {% block title %}Register{% endblock %}
 
- {% block content %}
+{% block content %}
     {% for flash_error in app.flashes('verify_email_error') %}
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-6 col-md-8 col-sm-10">
+            <h1 class="text-center mb-4">Register</h1>
 
-    {{ form_errors(registrationForm) }}
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            <form action="{{ path('app_register') }}" method="post">
+                {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <div class="mb-3">
+                    {{ form_label(registrationForm.email, 'Email address') }}
+                    {{ form_widget(registrationForm.email, { 'attr': {'class': 'form-control', 'id': 'email'} }) }}
+                </div>
+
+                <div class="mb-3">
+                    {{ form_label(registrationForm.plainPassword, 'Password') }}
+                    {{ form_widget(registrationForm.plainPassword, { 'attr': {'class': 'form-control', 'id': 'password'} }) }}
+                </div>
+
+                <div class="mb-3 form-check">
+                    {{ form_widget(registrationForm.agreeTerms, { 'attr': {'class': 'form-check-input', 'id': 'agreeTerms'} }) }}
+                    {{ form_label(registrationForm.agreeTerms, 'I agree to the terms') }}
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+                
+                {{ form_end(registrationForm) }}
+
+                <div class="mt-4">
+                    <p>Already have an account? <a href="{{ path('app_login') }}">Login here</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}
