@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}User index{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>User list</h1>
+    <a href="{{ path('app_admin_new') }}" class="btn btn-success mb-3">Create User</a>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Email</th>
+                <th scope="col">Roles</th>
+                <th scope="col">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+                    <td>
+                        <a href="{{ path('app_admin_edit', {'id': user.id}) }}" class="btn btn-primary">Edit</a>
+                        <a href="{{ path('app_admin_show', {'id': user.id}) }}" class="btn btn-danger">Show</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">No records found</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
