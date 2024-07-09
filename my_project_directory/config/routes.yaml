@@ -1,3 +1,7 @@
 userManager_controllers:
     resource: '../src/userManager/Controller/'
     type: attribute
+
+access_denied:
+    path: /access-denied
+    controller: App\userManager\Controller\DefaultController::accessDenied
