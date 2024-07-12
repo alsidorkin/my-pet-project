@@ -1,4 +1,6 @@
 <?php
+
+
 namespace App\Twig;
 
 use Twig\Extension\AbstractExtension;
@@ -24,7 +26,6 @@ class AppExtension extends AbstractExtension
     public function isActive(string $route): string
     {
         $request = $this->requestStack->getCurrentRequest();
-
-        return $request->get('_route') === $route ? 'active' : '';
+        return $request->getPathInfo() === $route ? 'active' : '';
     }
 }

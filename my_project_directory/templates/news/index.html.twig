@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Последние новости{% endblock %}
+
+{% block content %}
+
+<style>
+        .news-item img {
+            max-width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+    </style>
+
+     <h1>Выберите страну новостей:</h1>
+
+    <form action="{{ path('news') }}" method="GET">
+        <label for="country">Страна:</label>
+        <select id="country" name="country">
+        <option value="us" {% if selectedCountry == 'us' %}selected{% endif %}>United States</option>
+        <option value="gb" {% if selectedCountry == 'gb' %}selected{% endif %}>United Kingdom</option>
+        <option value="de" {% if selectedCountry == 'de' %}selected{% endif %}>Germany</option>
+         <option value="ua" {% if selectedCountry == 'ua' %}selected{% endif %}>Ukraine</option>
+    </select>
+        <button type="submit">Показать новости</button>
+    </form>
+    <h1>Последние новости</h1>
+    <div id="news-list">
+        {% for article in articles %}
+            <div class="news-item">
+                {% if article.urlToImage is defined %}
+                    <img src="{{ article.urlToImage }}" alt="">
+                {% endif %}
+                <h2>{{ article.title }}</h2>
+                <p>{{ article.description }}</p>
+                <p class="source">Источник: {{ article.source.name }}</p>
+                <a class="url" href="{{ article.url }}" target="_blank">Читать полностью</a>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

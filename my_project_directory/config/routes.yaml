@@ -2,6 +2,10 @@ userManager_controllers:
     resource: '../src/userManager/Controller/'
     type: attribute
 
+news_controllers:
+    resource: '../src/news/Controller/'
+    type: attribute      
+
 access_denied:
     path: /access-denied
     controller: App\userManager\Controller\DefaultController::accessDenied
