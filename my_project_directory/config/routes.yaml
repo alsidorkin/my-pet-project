@@ -4,7 +4,12 @@ userManager_controllers:
 
 news_controllers:
     resource: '../src/news/Controller/'
-    type: attribute      
+    type: attribute 
+
+todo_controllers:
+    resource: '../src/todo/Controller/'
+    type: attribute       
+        
 
 access_denied:
     path: /access-denied

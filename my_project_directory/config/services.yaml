@@ -30,3 +30,6 @@ services:
     App\Service\NewsApiService:
         arguments:
             $apiKey: '%env(NEWS_API_KEY)%'
+
+    GuzzleHttp\Client:
+        class: GuzzleHttp\Client        

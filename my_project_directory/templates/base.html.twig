@@ -31,12 +31,20 @@
                          <li>
                             <a href="{{ path('news') }}" class="nav-link text-dark {{ is_active(path('news')) }}">News</a>
                         </li>
+                         <li>
+                            <a href="{{ path('todo_oauth_start') }}" class="nav-link text-dark {{ is_active(path('app_todo')) }}">To do list</a>
+                        </li>
                 </ul>
                 <hr>
                 <div class="dropdown">
-                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle fs-6" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="https://avatars.githubusercontent.com/u/140085460?v=4" alt="" width="32" height="32" class="rounded-circle me-2">
-                   </a>
+                       {% if app.user %}
+                      <strong>{{ app.user.email }}</strong>
+                      {% else %}
+                       <a href="{{ path('app_login') }}" class="text-white text-decoration-none">Войти</a>
+    {% endif %}
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
                         <li><a class="dropdown-item" href="/user/profile">Profile</a></li>
                         <li><hr class="dropdown-divider"></li>

@@ -36,6 +36,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    private ?string $todoAccessToken = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -122,4 +125,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getTodoAccessToken(): ?string
+    {
+        return $this->todoAccessToken;
+    }
+
+    public function setTodoAccessToken(?string $todoAccessToken): self
+    {
+        $this->todoAccessToken = $todoAccessToken;
+        return $this;
+    }
+
 }

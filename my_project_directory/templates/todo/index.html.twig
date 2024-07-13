@@ -1,0 +1,71 @@
+{# templates/todo/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Список задач{% endblock %}
+
+{% block content %}
+    <h1>Список задач</h1>
+    
+    {% for task in tasks %}
+
+     {% set priorityColor = '' %}
+        {% if task.priority == 1 %}
+            {% set priorityColor = '#7ecc49' %}
+        {% elseif task.priority == 2 %}
+            {% set priorityColor = '#4073ff' %}
+        {% elseif task.priority == 3 %}
+            {% set priorityColor = '#fad000' %}
+        {% elseif task.priority == 4 %}
+            {% set priorityColor = '#db4035' %}
+        {% endif %}
+
+
+ {% set priority  = '' %}
+        {% if task.priority == 1 %}
+            {% set priority = 'Ugrent' %}
+        {% elseif task.priority == 2 %}
+            {% set priority = 'High' %}
+        {% elseif task.priority == 3 %}
+            {% set priority = 'Medium' %}
+        {% elseif task.priority == 4 %}
+            {% set priority = 'Low' %}
+        {% endif %}
+
+        <div class="accordion-item mb-2">
+            <div class="accordion-header" style="background-color: {{ priorityColor }};" id="task-{{ task.id }}">
+                <h2 class="accordion-header col-12 col-md-6">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#task-collapse-{{ task.id }}"
+                        aria-expanded="false" aria-controls="task-collapse-{{ task.id }}" data-priority="{{ task.priority }}">
+                        <span class="col-12 col-md-5"><i class="fa-solid fa-square-up-right"></i> <strong>{{ task.content }}</strong></span>
+                        <span class="col-5 col-md-3"><i class="fa-solid fa-hourglass-start"></i><span>{{ task.due.string }}</span></span>
+                    </button>
+                </h2>
+            </div>
+
+            <div id="task-collapse-{{ task.id }}" class="accordion-collapse collapse row" aria-labelledby="task-{{ task.id }}" data-bs-parent="#tasks-accordion">
+                <div class="accordion-body">
+                    <p class="row">
+                        <span class="col-12 col-md-6"><strong><i class="fa-solid fa-layer-group"></i> Категория:</strong> {{ task.category.title | default('N/A') }}</span>
+                    </p>
+                    <p class="row">
+                        <span class="col-12 col-md-6"><strong><i class="fa-solid fa-person-circle-question"></i> Приоритет:</strong> {{ priority }}</span>
+                        <span class="col-12 col-md-6"><strong><i class="fa-solid fa-hourglass-start"></i> Дата выполнения:</strong> {{ task.due.string }}</span>
+                    </p>
+                    <p>
+                        <strong><i class="fa-solid fa-file-prescription"></i> Описание:</strong> <em>{{ task.description | default('') }}</em>
+                    </p>
+                    <hr>
+                    <div class="d-flex justify-content-start action-task">   
+                        <a href="/todo/tasks/edit/{{ task.id }}" class="btn btn-primary me-2">Редактировать</a>
+                        <a href="/todo/tasks/delete/{{ task.id }}" class="btn btn-danger me-2">Удалить</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+    <div class="mb-3">
+        <a href="{{ path('app_todo') }}" class="btn btn-success">Create Task</a>
+    </div>
+{% endblock %}
