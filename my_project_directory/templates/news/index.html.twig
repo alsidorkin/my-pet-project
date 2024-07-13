@@ -11,9 +11,7 @@
             object-fit: cover;
         }
     </style>
-
      <h1>Выберите страну новостей:</h1>
-
     <form action="{{ path('news') }}" method="GET">
         <label for="country">Страна:</label>
         <select id="country" name="country">
@@ -22,6 +20,16 @@
         <option value="de" {% if selectedCountry == 'de' %}selected{% endif %}>Germany</option>
          <option value="ua" {% if selectedCountry == 'ua' %}selected{% endif %}>Ukraine</option>
     </select>
+    <label for="category">Category:</label>
+        <select name="category" id="category">
+            <option value="business" {% if selectedCategory == 'business' %}selected{% endif %}>Business</option>
+            <option value="entertainment" {% if selectedCategory == 'entertainment' %}selected{% endif %}>Entertainment</option>
+            <option value="general" {% if selectedCategory == 'general' %}selected{% endif %}>General</option>
+            <option value="health" {% if selectedCategory == 'health' %}selected{% endif %}>Health</option>
+            <option value="science" {% if selectedCategory == 'science' %}selected{% endif %}>Science</option>
+            <option value="sports" {% if selectedCategory == 'sports' %}selected{% endif %}>Sports</option>
+            <option value="technology" {% if selectedCategory == 'technology' %}selected{% endif %}>Technology</option>         
+        </select>    
         <button type="submit">Показать новости</button>
     </form>
     <h1>Последние новости</h1>

@@ -20,13 +20,13 @@ class NewsController extends AbstractController
     public function index(Request $request): Response
     {
        $country = $request->query->get('country', 'us'); 
-
-       
-            $articles = $this->newsApiService->getTopHeadlines($country);
+       $category = $request->query->get('category', 'business');
+            $articles = $this->newsApiService->getTopHeadlines($country, $category, 10, 1);
 
             return $this->render('news/index.html.twig', [
                 'articles' => $articles['articles'], 
                 'selectedCountry' => $country,
+                'selectedCategory' => $category,
             ]);
     }
 }
