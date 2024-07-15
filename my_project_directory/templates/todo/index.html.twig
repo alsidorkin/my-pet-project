@@ -1,4 +1,4 @@
-{# templates/todo/index.html.twig #}
+
 
 {% extends 'base.html.twig' %}
 
@@ -58,7 +58,11 @@
                     <hr>
                     <div class="d-flex justify-content-start action-task">   
                         <a href="/todo/tasks/edit/{{ task.id }}" class="btn btn-primary me-2">Редактировать</a>
-                        <a href="/todo/tasks/delete/{{ task.id }}" class="btn btn-danger me-2">Удалить</a>
+                        <form action="{{ path('app_todo_delete', {'id': task.id}) }}" method="post">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_task_' ~ task.id) }}">
+                            <button type="submit" class="btn btn-danger">Удалить</button>
+                        </form>
                     </div>
                 </div>
             </div>

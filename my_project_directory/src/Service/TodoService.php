@@ -107,4 +107,22 @@ class TodoService
             return false;
         }
     }
+
+    public function deleteTask(string $accessToken, string $taskId): bool
+    {
+        try {
+            $response = $this->client->request('DELETE', "https://api.todoist.com/rest/v2/tasks/{$taskId}", [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'Content-Type' => 'application/json'
+                ],
+            ]);
+
+            return $response->getStatusCode() === 204;
+        } catch (\Exception $e) {
+            echo('Error deleting task from Todoist API: ' . $e->getMessage());
+            return false;
+        }
+    }
+
 }

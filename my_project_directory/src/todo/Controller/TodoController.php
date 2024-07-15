@@ -75,5 +75,21 @@ class TodoController extends AbstractController
         ]);
     }
 
+    #[Route('/todo/tasks/delete/{id}', name: 'app_todo_delete', methods: ['POST'])]
+    public function deleteTask(string $id, Request $request): Response
+    {
+    $user = $this->getUser();
+
+    if (!$user) {
+        throw $this->createAccessDeniedException('User is not authenticated.');
+    }
+
+    $accessToken = $user->getTodoAccessToken();
+    
+    $success = $this->todoService->deleteTask($accessToken, $id);
+
+    return $this->redirectToRoute('app_todo');
+}
+
     
 }
