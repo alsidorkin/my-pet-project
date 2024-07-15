@@ -1,7 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{% endblock %}
+{% block title %}To-Do List{% endblock %}
 
-{% block body %}
+{% block content %}
+    <h1>Calendar</h1>
 
+    <div id="calendar"></div>
+
+    <script>
+        var events = [
+            {% for task in tasks %}
+                {
+                    title: '{{ task.content }}',
+                    start: '{{ task.due.date|date('Y-m-d') }}' 
+                },
+            {% endfor %}
+        ];
+    </script>
+    <script src="{{ asset('js/calendar.js') }}"></script>
 {% endblock %}
+
