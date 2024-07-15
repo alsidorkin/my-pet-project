@@ -91,5 +91,26 @@ class TodoController extends AbstractController
     return $this->redirectToRoute('app_todo');
 }
 
-    
+#[Route('/todo/tasks/complete/{id}', name: 'app_todo_complete', methods: ['POST'])]
+public function completeTask(string $id): Response
+{
+    $user = $this->getUser();
+
+    if (!$user) {
+        throw $this->createAccessDeniedException('User is not authenticated.');
+    }
+
+    $accessToken = $user->getTodoAccessToken();
+
+    $success = $this->todoService->completeTask($accessToken, $id);
+
+    if ($success) {
+        $this->addFlash('success', 'Task marked as completed successfully');
+    } else {
+        $this->addFlash('error', 'Failed to mark task as completed');
+    }
+
+    return $this->redirectToRoute('app_todo');
+}
+
 }

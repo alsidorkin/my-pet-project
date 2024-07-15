@@ -125,4 +125,20 @@ class TodoService
         }
     }
 
+    public function completeTask(string $accessToken, string $taskId): bool
+{
+    try {
+        $response = $this->client->request('POST', 'https://api.todoist.com/rest/v2/tasks/' . $taskId . '/close', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $accessToken,
+            ]
+        ]);
+
+        return $response->getStatusCode() === 204;
+    } catch (\Exception $e) {
+        echo('Error marking task as completed: ' . $e->getMessage());
+        return false;
+    }
+}
+
 }

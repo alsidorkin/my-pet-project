@@ -1,5 +1,3 @@
-
-
 {% extends 'base.html.twig' %}
 
 {% block title %}Список задач{% endblock %}
@@ -56,7 +54,10 @@
                         <strong><i class="fa-solid fa-file-prescription"></i> Описание:</strong> <em>{{ task.description | default('') }}</em>
                     </p>
                     <hr>
-                    <div class="d-flex justify-content-start action-task">   
+                    <div class="d-flex justify-content-start action-task"> 
+                     <form action="{{ path('app_todo_complete', {id: task.id}) }}" method="post">
+                        <button type="submit" class="btn btn-success">Complete Task</button>
+                          </form>  
                         <a href="/todo/tasks/edit/{{ task.id }}" class="btn btn-primary me-2">Редактировать</a>
                         <form action="{{ path('app_todo_delete', {'id': task.id}) }}" method="post">
                             <input type="hidden" name="_method" value="DELETE">
