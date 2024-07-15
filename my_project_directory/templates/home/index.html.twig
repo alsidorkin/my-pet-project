@@ -8,15 +8,11 @@
     <div id="calendar"></div>
 
     <script>
-        var events = [
-            {% for task in tasks %}
-                {
-                    title: '{{ task.content }}',
-                    start: '{{ task.due.date|date('Y-m-d') }}' 
-                },
-            {% endfor %}
-        ];
+        var tasks = {{ tasks|json_encode|raw }};
+        var holidays = {{ holidays|json_encode|raw }};
     </script>
+
+   
     <script src="{{ asset('js/calendar.js') }}"></script>
 {% endblock %}
 

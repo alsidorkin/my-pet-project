@@ -120,18 +120,11 @@ background: #198754;
     /* font-family: 'Georgia', serif; */
     font-family: 'Roboto', sans-serif;
 }
-/* #calendar{
-    width: 1300px;
-    padding-right : 0px;
-    overflow-x: auto;
-    margin-right: 20px;
 
+
+
+.holiday-event {
+    background-color: red;
+    color: white;
 }
 
-.fc td {
-    --bs-gutter-x: 1.5rem !important;
-} */
-
-/* .fc-day{
-    text-align: center;
-} */
