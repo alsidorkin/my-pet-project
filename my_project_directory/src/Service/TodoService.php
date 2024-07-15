@@ -30,6 +30,22 @@ class TodoService
         }
     }
 
+    public function getTask(string $accessToken, string $taskId): array
+{
+    try {
+        $response = $this->client->request('GET', 'https://api.todoist.com/rest/v2/tasks/' . $taskId, [
+            'headers' => [
+                'Authorization' => 'Bearer ' . $accessToken,
+            ]
+        ]);
+
+        return json_decode($response->getBody(), true);
+        
+    } catch (\Exception $e) {
+        echo('Error fetching task from Todoist API: ' . $e->getMessage());
+        return [];
+    }
+}
     public function createTask(string $accessToken, string $content, string $due, ?string $description = null, int $priority = 1 )
     {
         
@@ -61,4 +77,34 @@ class TodoService
         return $responseData;
     }
 
+    public function updateTask(string $accessToken, string $taskId, string $content, ?string $due, ?string $description, int $priority): bool
+    {
+        try {
+            $params = [
+                'content' => $content,
+                'priority' => $priority
+            ];
+    
+            if ($due) {
+                $params['due_string'] = $due;
+            }
+    
+            if ($description) {
+                $params['description'] = $description;
+            }
+    
+            $response = $this->client->request('POST', "https://api.todoist.com/rest/v2/tasks/{$taskId}", [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $accessToken,
+                    'Content-Type' => 'application/json'
+                ],
+                'json' => $params,
+            ]);
+    
+            return $response->getStatusCode() === 200;
+        } catch (\Exception $e) {
+            echo('Error updating task in Todoist API: ' . $e->getMessage());
+            return false;
+        }
+    }
 }

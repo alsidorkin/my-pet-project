@@ -52,5 +52,28 @@ class TodoController extends AbstractController
         }
         return $this->render('todo/create_task.html.twig');
     }
+
+    #[Route('/todo/tasks/edit/{id}', name: 'app_todo_edit', methods: ['GET', 'POST'])]
+    public function editTask(Request $request, string $id): Response
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            throw $this->createAccessDeniedException('User is not authenticated.');
+        }
+        $accessToken = $user->getTodoAccessToken();
+        $task = $this->todoService->getTask($accessToken, $id);
+        if ($request->isMethod('POST')) {           
+            $content = $request->request->get('content');
+            $due = $request->request->get('due'); 
+            $description = $request->request->get('description');
+            $priority = $request->request->getInt('priority', 1);
+            $this->todoService->updateTask($accessToken, $id, $content, $due, $description, $priority);           
+            return $this->redirectToRoute('app_todo');
+        }
+        return $this->render('todo/edit_task.html.twig', [
+            'task' => $task,
+        ]);
+    }
+
     
 }
