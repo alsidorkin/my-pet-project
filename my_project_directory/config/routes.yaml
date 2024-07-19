@@ -10,7 +10,6 @@ todo_controllers:
     resource: '../src/todo/Controller/'
     type: attribute       
         
-
 access_denied:
     path: /access-denied
     controller: App\userManager\Controller\DefaultController::accessDenied

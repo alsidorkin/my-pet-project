@@ -128,3 +128,16 @@ background: #198754;
     color: white;
 }
 
+.weather-sunny {
+    background-color: yellow;
+    color: black;
+}
+.weather-cloudy {
+    background-color: grey;
+    color: white;
+}
+.weather-rainy {
+    background-color: blue;
+    color: white;
+}
+

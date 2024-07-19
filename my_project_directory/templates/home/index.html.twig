@@ -10,9 +10,12 @@
     <script>
         var tasks = {{ tasks|json_encode|raw }};
         var holidays = {{ holidays|json_encode|raw }};
+        var forecast = {{ forecast|json_encode|raw }};
     </script>
 
-   
-    <script src="{{ asset('js/calendar.js') }}"></script>
+    <style>
+        
+    </style>
+   <script src="{{ asset('app/js/calendar.js') }}"></script>
 {% endblock %}
 

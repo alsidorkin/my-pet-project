@@ -5,15 +5,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\TodoService;
+use App\Service\WeatherService;
 use GuzzleHttp\Client;
 
 class HomeController extends AbstractController
 {
     private $todoService;
+    private $weatherService;
 
-    public function __construct(TodoService $todoService) 
+    public function __construct(TodoService $todoService, WeatherService $weatherService) 
     {
         $this->todoService = $todoService;
+        $this->weatherService = $weatherService;
     }
 
     #[Route('/', name: 'app_home')]
@@ -28,9 +31,15 @@ class HomeController extends AbstractController
 
         $holidays = $this->fetchHolidays('UA', date('Y'));
 
+        $lat = 50.45; 
+        $lon = 30.523;
+        $cnt = 16; 
+        $forecast = $this->weatherService->getDailyForecast($lat, $lon, $cnt);
+
         return $this->render('home/index.html.twig', [
             'tasks' => $tasks,
             'holidays' => $holidays,
+            'forecast' => $forecast,
         ]);
     }
 
