@@ -37,4 +37,54 @@ class CronController extends AbstractController
         ]);
     }
 
+     #[Route('/cron/add', name: 'cron_add', methods: ['POST'])]
+    public function add(Request $request): Response
+    {
+            $minute = $request->request->get('minute');
+            $hour = $request->request->get('hour');
+            $day = $request->request->get('day');
+            $month = $request->request->get('month');
+            $weekday = $request->request->get('weekday');
+            $command = $request->request->get('command');
+
+    if (empty($minute) || empty($hour) || empty($day) || empty($month) || empty($weekday) || empty($command)) {
+        $this->addFlash('error', 'All fields must be filled.');
+        return $this->redirectToRoute('app_cron');
+    }
+    $cronJob = "$minute $hour $day $month $weekday $command >/dev/null 2>&1";
+    $output = $this->ssh->exec('crontab -l');
+    $output .= $cronJob . PHP_EOL;
+    file_put_contents('/tmp/crontab.txt', $output);
+    $this->ssh->exec('echo "' . addslashes($output) . '" > /tmp/crontab.txt');
+    $this->ssh->exec('crontab /tmp/crontab.txt');
+    $this->addFlash('success', 'Cron job added successfully.');
+    return $this->redirectToRoute('app_cron');
+    }
+
+
+
+    #[Route('/cron/remove', name: 'cron_remove', methods: ['POST'])]
+    public function remove(Request $request): Response
+    {
+        $cronJob = $request->request->get('cronJob');
+
+        if (empty($cronJob)) {
+            $this->addFlash('error', 'Cron job field cannot be empty.');
+            return $this->redirectToRoute('app_cron');
+        }
+
+        $output = $this->ssh->exec('crontab -l');
+        $cronArray = explode(PHP_EOL, $output);
+        $cronArray = array_filter($cronArray, function($line) use ($cronJob) {
+            return strpos($line, $cronJob) === false;
+        });
+
+        file_put_contents('/tmp/crontab.txt', implode(PHP_EOL, $cronArray) . PHP_EOL);
+        $this->ssh->exec('echo "' . addslashes(implode(PHP_EOL, $cronArray)) . '" > /tmp/crontab.txt');
+        $this->ssh->exec('crontab /tmp/crontab.txt');
+        $this->addFlash('success', 'Cron job removed successfully.');
+
+        return $this->redirectToRoute('app_cron');
+    }
+
 }

@@ -32,7 +32,7 @@
     </ul>
 
     <h2 class="mt-4">Add New Cron Job</h2>
-    <form action="" method="POST">
+    <form action="{{ path('cron_add') }}" method="POST">
         <div class="form-group">
             <label for="minute">Minute</label>
             <input type="text" id="minute" name="minute" class="form-control" placeholder="0-59" maxlength="2">
