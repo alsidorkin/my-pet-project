@@ -8,7 +8,11 @@ news_controllers:
 
 todo_controllers:
     resource: '../src/todo/Controller/'
-    type: attribute       
+    type: attribute   
+
+cron_controllers:
+    resource: '../src/cron/Controller/'
+    type: attribute             
         
 access_denied:
     path: /access-denied
