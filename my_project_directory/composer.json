@@ -12,6 +12,8 @@
         "doctrine/doctrine-migrations-bundle": "^3.3",
         "doctrine/orm": "^3.2",
         "guzzlehttp/guzzle": "^7.8",
+        "phpoffice/phpspreadsheet": "^2.1",
+        "phpseclib/phpseclib": "^3.0",
         "symfony/asset": "7.1.*",
         "symfony/console": "7.1.*",
         "symfony/dotenv": "7.1.*",

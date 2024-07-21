@@ -18,8 +18,8 @@ class CronController extends AbstractController
     {
         $host = '127.0.0.1';
         $port = 22;
-        $this->username = '****';
-        $this->password = '*****';
+        $this->username = '***';
+        $this->password = '****';
         $this->ssh = new SSH2($host, $port);
         if (!$this->ssh->login($this->username, $this->password)) {
             throw new UnableToConnectException('Unable to connect to the remote server with provided credentials.');
@@ -47,7 +47,7 @@ class CronController extends AbstractController
             $weekday = $request->request->get('weekday');
             $command = $request->request->get('command');
 
-    if (empty($minute) || empty($hour) || empty($day) || empty($month) || empty($weekday) || empty($command)) {
+    if ($minute === '' && $hour === '' && $day === '' && $month === '' && $weekday === '' && $command === '') {
         $this->addFlash('error', 'All fields must be filled.');
         return $this->redirectToRoute('app_cron');
     }
