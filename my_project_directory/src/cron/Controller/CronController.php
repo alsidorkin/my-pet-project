@@ -18,7 +18,7 @@ class CronController extends AbstractController
     {
         $host = '127.0.0.1';
         $port = 22;
-        $this->username = '***';
+        $this->username = '****';
         $this->password = '****';
         $this->ssh = new SSH2($host, $port);
         if (!$this->ssh->login($this->username, $this->password)) {

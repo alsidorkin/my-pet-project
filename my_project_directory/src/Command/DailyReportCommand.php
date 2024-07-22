@@ -48,8 +48,7 @@ class DailyReportCommand extends Command
 
         $email = (new Email())
             ->from('sidorkinalex1931@outlook.com')
-            ->to('alexsidorkin567@gmail.com')
-            ->to('dev.lubinets@gmail.com')
+            ->to('alexsidorkin567@gmail.com', 'dev.lubinets@gmail.com')
             ->subject('Daily Report')
             ->text('Please find the daily report attached.')
             ->attachFromPath($tempFile);
