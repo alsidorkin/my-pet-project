@@ -10,6 +10,8 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Doctrine\ORM\EntityManagerInterface;
 use GuzzleHttp\Client;
 
+#[Route('/profile')]
+#[IsGranted('ROLE_USER')]
 class TodoAuthController extends AbstractController
 {
     private $security;
@@ -63,10 +65,11 @@ class TodoAuthController extends AbstractController
         }
 
         $accessToken = $data['access_token'];
-               
-        $user = $this->security->getUser();
-        $user->setTodoAccessToken($accessToken);
        
+        $user = $this->security->getUser();
+        
+        $user->setTodoAccessToken($accessToken);
+      
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 

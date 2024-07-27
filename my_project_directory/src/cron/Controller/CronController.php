@@ -7,7 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use phpseclib3\Net\SSH2;
 use phpseclib3\Exception\UnableToConnectException;
-
+#[Route('/profile')]
+#[IsGranted('ROLE_USER')]
 class CronController extends AbstractController
 {
     private $ssh;

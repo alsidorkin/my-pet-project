@@ -10,6 +10,8 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 use App\Service\TodoService;
 use GuzzleHttp\Client;
 
+#[Route('/profile')]
+#[IsGranted('ROLE_USER')]
 class TodoController extends AbstractController
 {
     private $todoService;
@@ -24,6 +26,10 @@ class TodoController extends AbstractController
     {
         $user = $this->getUser();
 
+        if (!$user) {
+            throw $this->createAccessDeniedException('User is not authenticated.');
+        }
+        
         $accessToken = $user->getTodoAccessToken();
 
         $tasks = $this->todoService->getTasks($accessToken);

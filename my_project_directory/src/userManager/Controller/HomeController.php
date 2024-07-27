@@ -27,6 +27,14 @@ class HomeController extends AbstractController
             throw $this->createAccessDeniedException('User is not authenticated.');
         }
         $accessToken = $user->getTodoAccessToken();
+
+         if (empty($accessToken)) {
+            return $this->render('home/index.html.twig', [
+                'tasks' => [],
+                'holidays' => $this->fetchHolidays('UA', date('Y')),
+                'forecast' => $this->weatherService->getDailyForecast(50.45, 30.523, 16),
+            ]);
+        }
         $tasks = $this->todoService->getTasks($accessToken);
 
         $holidays = $this->fetchHolidays('UA', date('Y'));
