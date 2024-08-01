@@ -155,5 +155,136 @@ Setting Up Cron Jobs
    ssh user@your-server-address
 
 
+ Comment API
+
+This API allows you to manage comments in the application. You can perform CRUD operations (Create, Read, Update, Delete) on comments.
+
+ Authentication
+
+Authentication is handled using JWT (JSON Web Token). To interact with the protected endpoints, you need to obtain a token by making a POST request to `/api/login_check`.
+
+ Obtain JWT Token
+
+POST `/api/login_check`
+
+Request Body:
+json
+{
+    "username": "your_email@example.com",
+    "password": "your_password"
+}
+
+Response:
+json
+{
+    "token": "your_jwt_token"
+}
+Include this token in the Authorization header of your requests using the Bearer scheme.
+
+
+Endpoints
+
+1. Create a Comment
+POST /api/comment
+
+Request Body:
+
+json
+{
+    "content": "This is a comment content"
+}
+Response:
+
+json
+{
+    "id": 1,
+    "content": "This is a comment content",
+    "author": "your_email@example.com",
+    "createdAt": "2024-07-31T12:34:56+00:00"
+}
+
+2. Retrieve All Comments
+
+GET /api/comment
+
+Response:
+
+json
+[
+    {
+        "id": 1,
+        "content": "This is a comment content",
+        "author": "your_email@example.com",
+        "createdAt": "2024-07-31T12:34:56+00:00"
+    },
+
+]
+
+
+3. Retrieve a Single Comment
+
+GET /api/comment/{id}
+
+Response:
+
+json
+{
+    "id": 1,
+    "content": "This is a comment content",
+    "author": "your_email@example.com",
+    "createdAt": "2024-07-31T12:34:56+00:00"
+}
+
+4. Update a Comment
+
+PUT /api/comment/{id}
+
+Request Body:
+
+json
+{
+    "content": "Updated comment content"
+}
+
+
+Response:
+
+json
+{
+    "id": 1,
+    "content": "Updated comment content",
+    "author": "your_email@example.com",
+    "createdAt": "2024-07-31T12:34:56+00:00"
+}
+
+5. Delete a Comment
+
+DELETE /api/comment/{id}
+
+Response:
+
+json
+{
+    "message": "Comment deleted successfully"
+}
+
+
+Error Handling
+
+All responses include a standard error structure in case of errors.
+
+Error Response Example:
+
+json
+{
+    "type": "https://tools.ietf.org/html/rfc2616#section-10",
+    "title": "An error occurred",
+    "status": 400,
+    "detail": "Error message here"
+}
+Notes
+Ensure you include the JWT token in the Authorization header for all protected endpoints.
+The createdAt field is automatically set to the current date and time when a comment is created.
+For security reasons, make sure to handle tokens securely and avoid exposing them in client-side code.
 
 
