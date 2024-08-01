@@ -12,7 +12,14 @@ todo_controllers:
 
 cron_controllers:
     resource: '../src/cron/Controller/'
-    type: attribute             
+    type: attribute  
+
+api_controllers:
+    resource: '../src/api/Controller/'
+    type: attribute 
+    
+api_login_check:
+    path: /api/login_check                
         
 access_denied:
     path: /access-denied

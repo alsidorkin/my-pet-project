@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Annotation\IsGranted;
 
 class CommentController extends AbstractController
 {
@@ -23,6 +24,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/comment', name: 'app_comment', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function getComments(CommentRepository $commentRepository): JsonResponse
     {
         $comments = $commentRepository->findAll();
@@ -33,6 +35,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/comment/{id}', name: 'get_comment', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function getComment(Comment $comment): JsonResponse
     {
         $data = $this->serializer->normalize($comment, null, ['groups' => 'comment:read']);
@@ -40,6 +43,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/comment/add', name: 'add_comment', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function createComment(Request $request): JsonResponse
     {
         $data = $request->getContent();
@@ -52,6 +56,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/comment/update/{id}', name: 'update_comment', methods: ['PUT'])]
+    #[IsGranted('ROLE_USER')]
     public function updateComment(Request $request, Comment $comment): JsonResponse
     {
         $data = $request->getContent();
@@ -63,6 +68,7 @@ class CommentController extends AbstractController
     }
 
     #[Route('/api/comment/delete/{id}', name: 'delete_comment', methods: ['DELETE'])]
+    #[IsGranted('ROLE_USER')]
     public function deleteComment(Comment $comment): JsonResponse
     {
         $this->entityManager->remove($comment);
